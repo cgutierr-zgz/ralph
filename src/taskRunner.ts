@@ -51,6 +51,10 @@ export class TaskRunner {
         return this.settings;
     }
 
+    getHistory(): TaskCompletion[] {
+        return [...this.taskHistory];
+    }
+
     getTaskHistory(): TaskCompletion[] {
         return [...this.taskHistory];
     }

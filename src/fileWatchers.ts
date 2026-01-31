@@ -19,8 +19,8 @@ export class PrdWatcher {
         this.dispose();
 
         const root = getWorkspaceRoot();
-        const config = getConfig();
         if (!root) { return; }
+        const config = getConfig(vscode.Uri.file(root));
 
         this.lastContent = initialContent;
         this.callback = callback;
@@ -108,8 +108,8 @@ export class PrdCreationWatcher {
         this.dispose();
 
         const root = getWorkspaceRoot();
-        const config = getConfig();
         if (!root) { return; }
+        const config = getConfig(vscode.Uri.file(root));
 
         this.callback = callback;
         this.enabled = true;

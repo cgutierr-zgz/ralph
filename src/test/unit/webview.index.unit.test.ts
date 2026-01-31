@@ -68,4 +68,8 @@ describe('Webview Index', () => {
         assert.ok(scripts.length > 0);
         assert.ok(scripts.includes('function'));
     });
+
+    it('should export getDurationChartSection', () => {
+        assert.ok(typeof webview.getDurationChartSection === 'function');
+    });
 });

@@ -14,133 +14,133 @@ import {
 } from '../../webview/templates';
 import { Task, TaskStatus } from '../../types';
 
-suite('Webview Templates Test Suite', () => {
-    suite('Icons', () => {
-        test('should have play icon', () => {
+describe('Webview Templates Test Suite', () => {
+    describe('Icons', () => {
+        it('should have play icon', () => {
             assert.ok(Icons.play);
             assert.ok(Icons.play.includes('svg'));
         });
 
-        test('should have pause icon', () => {
+        it('should have pause icon', () => {
             assert.ok(Icons.pause);
             assert.ok(Icons.pause.includes('svg'));
         });
 
-        test('should have stop icon', () => {
+        it('should have stop icon', () => {
             assert.ok(Icons.stop);
             assert.ok(Icons.stop.includes('svg'));
         });
 
-        test('should have step icon', () => {
+        it('should have step icon', () => {
             assert.ok(Icons.step);
             assert.ok(Icons.step.includes('svg'));
         });
 
-        test('should have refresh icon', () => {
+        it('should have refresh icon', () => {
             assert.ok(Icons.refresh);
             assert.ok(Icons.refresh.includes('svg'));
         });
 
-        test('should have settings icon', () => {
+        it('should have settings icon', () => {
             assert.ok(Icons.settings);
             assert.ok(Icons.settings.includes('svg'));
         });
 
-        test('should have check icon', () => {
+        it('should have check icon', () => {
             assert.ok(Icons.check);
             assert.ok(Icons.check.includes('svg'));
         });
 
-        test('should have rocket icon', () => {
+        it('should have rocket icon', () => {
             assert.ok(Icons.rocket);
             assert.ok(Icons.rocket.includes('svg'));
         });
 
-        test('should have star icon', () => {
+        it('should have star icon', () => {
             assert.ok(Icons.star);
             assert.ok(Icons.star.includes('svg'));
         });
     });
 
-    suite('getLogo', () => {
-        test('should generate SVG with default size', () => {
+    describe('getLogo', () => {
+        it('should generate SVG with default size', () => {
             const logo = getLogo();
             assert.ok(logo.includes('svg'));
             assert.ok(logo.includes('width="24"'));
             assert.ok(logo.includes('height="24"'));
         });
 
-        test('should generate SVG with custom size', () => {
+        it('should generate SVG with custom size', () => {
             const logo = getLogo(48);
             assert.ok(logo.includes('width="48"'));
             assert.ok(logo.includes('height="48"'));
         });
 
-        test('should include Ralph "R" text', () => {
+        it('should include Ralph "R" text', () => {
             const logo = getLogo();
             assert.ok(logo.includes('>R<'));
         });
 
-        test('should include gradient definition', () => {
+        it('should include gradient definition', () => {
             const logo = getLogo();
             assert.ok(logo.includes('linearGradient'));
             assert.ok(logo.includes('logoGradient'));
         });
 
-        test('should include circles for the logo shape', () => {
+        it('should include circles for the logo shape', () => {
             const logo = getLogo();
             assert.ok(logo.includes('<circle'));
         });
     });
 
-    suite('getHeader', () => {
-        test('should generate header HTML', () => {
+    describe('getHeader', () => {
+        it('should generate header HTML', () => {
             const header = getHeader();
             assert.ok(header.includes('class="header'));
             assert.ok(header.includes('id="header"'));
         });
 
-        test('should include status pill', () => {
+        it('should include status pill', () => {
             const header = getHeader();
             assert.ok(header.includes('status-pill'));
             assert.ok(header.includes('statusText'));
         });
 
-        test('should include timing display', () => {
+        it('should include timing display', () => {
             const header = getHeader();
             assert.ok(header.includes('timing-display'));
             assert.ok(header.includes('elapsedTime'));
             assert.ok(header.includes('etaTime'));
         });
 
-        test('should include countdown clock', () => {
+        it('should include countdown clock', () => {
             const header = getHeader();
             assert.ok(header.includes('countdown'));
             assert.ok(header.includes('clockFill'));
         });
 
-        test('should include Ralph title', () => {
+        it('should include Ralph title', () => {
             const header = getHeader();
             assert.ok(header.includes('<h1>Ralph</h1>'));
         });
     });
 
-    suite('getControls', () => {
-        test('should generate controls with PRD', () => {
+    describe('getControls', () => {
+        it('should generate controls with PRD', () => {
             const controls = getControls(true);
             assert.ok(controls.includes('btnStart'));
             assert.ok(controls.includes('btnPause'));
             assert.ok(controls.includes('btnStop'));
         });
 
-        test('should disable start button when no PRD', () => {
+        it('should disable start button when no PRD', () => {
             const controls = getControls(false);
             assert.ok(controls.includes('id="btnStart"'));
 
             assert.ok(controls.includes('id="btnStart" onclick="send(\'start\')" disabled'));
         });
 
-        test('should enable start button when PRD exists', () => {
+        it('should enable start button when PRD exists', () => {
             const controls = getControls(true);
 
             assert.ok(controls.includes('id="btnStart" onclick="send(\'start\')"'));
@@ -150,100 +150,100 @@ suite('Webview Templates Test Suite', () => {
             assert.ok(!startButtonMatch[0].includes('disabled'));
         });
 
-        test('should include step button', () => {
+        it('should include step button', () => {
             const controls = getControls(true);
             assert.ok(controls.includes('btnNext'));
         });
 
-        test('should include refresh button', () => {
+        it('should include refresh button', () => {
             const controls = getControls(true);
             assert.ok(controls.includes("send('refresh')"));
         });
 
-        test('should include settings button', () => {
+        it('should include settings button', () => {
             const controls = getControls(true);
             assert.ok(controls.includes('openSettings()'));
         });
 
-        test('should include resume button (hidden by default)', () => {
+        it('should include resume button (hidden by default)', () => {
             const controls = getControls(true);
             assert.ok(controls.includes('btnResume'));
             assert.ok(controls.includes('style="display:none"'));
         });
     });
 
-    suite('getSetupSection', () => {
-        test('should generate setup section HTML', () => {
+    describe('getSetupSection', () => {
+        it('should generate setup section HTML', () => {
             const setup = getSetupSection();
             assert.ok(setup.includes('setup-section'));
         });
 
-        test('should include rocket icon', () => {
+        it('should include rocket icon', () => {
             const setup = getSetupSection();
             assert.ok(setup.includes('setup-icon'));
         });
 
-        test('should include task input textarea', () => {
+        it('should include task input textarea', () => {
             const setup = getSetupSection();
             assert.ok(setup.includes('taskInput'));
             assert.ok(setup.includes('textarea'));
         });
 
-        test('should include generate PRD button', () => {
+        it('should include generate PRD button', () => {
             const setup = getSetupSection();
             assert.ok(setup.includes('generatePrd()'));
             assert.ok(setup.includes('generate-btn'));
         });
 
-        test('should include placeholder text', () => {
+        it('should include placeholder text', () => {
             const setup = getSetupSection();
             assert.ok(setup.includes('placeholder='));
         });
 
-        test('should include description text', () => {
+        it('should include description text', () => {
             const setup = getSetupSection();
             assert.ok(setup.includes('setup-description'));
         });
     });
 
-    suite('getTimelineSection', () => {
-        test('should generate timeline section HTML', () => {
+    describe('getTimelineSection', () => {
+        it('should generate timeline section HTML', () => {
             const timeline = getTimelineSection();
             assert.ok(timeline.includes('timeline-section'));
         });
 
-        test('should include timeline header', () => {
+        it('should include timeline header', () => {
             const timeline = getTimelineSection();
             assert.ok(timeline.includes('timeline-header'));
             assert.ok(timeline.includes('Task Timeline'));
         });
 
-        test('should include timeline count', () => {
+        it('should include timeline count', () => {
             const timeline = getTimelineSection();
             assert.ok(timeline.includes('timelineCount'));
             assert.ok(timeline.includes('0/0'));
         });
 
-        test('should include empty state', () => {
+        it('should include empty state', () => {
             const timeline = getTimelineSection();
             assert.ok(timeline.includes('timelineEmpty'));
             assert.ok(timeline.includes('No tasks completed yet'));
         });
 
-        test('should include bars and labels containers', () => {
+        it('should include bars and labels containers', () => {
             const timeline = getTimelineSection();
             assert.ok(timeline.includes('timelineBars'));
             assert.ok(timeline.includes('timelineLabels'));
         });
     });
 
-    suite('getRequirementsSection', () => {
-        test('should generate requirements section HTML', () => {
+    describe('getRequirementsSection', () => {
+        it('should generate requirements section HTML', () => {
             const requirements = getRequirementsSection();
             assert.ok(requirements.includes('requirements-section'));
         });
 
-        test('should include all requirement checkboxes', () => {
+        it('should include all requirement checkboxes', () => {
             const requirements = getRequirementsSection();
             assert.ok(requirements.includes('reqWriteTests'));
             assert.ok(requirements.includes('reqRunTests'));
@@ -253,30 +253,30 @@ suite('Webview Templates Test Suite', () => {
             assert.ok(requirements.includes('reqCommit'));
         });
 
-        test('should include toggle functionality', () => {
+        it('should include toggle functionality', () => {
             const requirements = getRequirementsSection();
             assert.ok(requirements.includes('toggleRequirements()'));
             assert.ok(requirements.includes('reqToggle'));
         });
 
-        test('should include updateRequirements handler', () => {
+        it('should include updateRequirements handler', () => {
             const requirements = getRequirementsSection();
             assert.ok(requirements.includes('updateRequirements()'));
         });
 
-        test('should include acceptance criteria header', () => {
+        it('should include acceptance criteria header', () => {
             const requirements = getRequirementsSection();
             assert.ok(requirements.includes('Acceptance Criteria'));
         });
 
-        test('should include requirements description', () => {
+        it('should include requirements description', () => {
             const requirements = getRequirementsSection();
             assert.ok(requirements.includes('requirements-desc'));
         });
     });
 
-    suite('getTaskSection', () => {
-        test('should show current task when task exists', () => {
+    describe('getTaskSection', () => {
+        it('should show current task when task exists', () => {
             const task: Task = {
                 id: 'task-1',
                 description: 'Test task description',
@@ -290,18 +290,18 @@ suite('Webview Templates Test Suite', () => {
             assert.ok(section.includes('task-section active'));
         });
 
-        test('should show completed state when no task and has tasks', () => {
+        it('should show completed state when no task and has tasks', () => {
             const section = getTaskSection(null, true);
             assert.ok(section.includes('All tasks completed!'));
             assert.ok(section.includes('empty-state'));
         });
 
-        test('should return empty string when no task and no tasks', () => {
+        it('should return empty string when no task and no tasks', () => {
             const section = getTaskSection(null, false);
             assert.strictEqual(section, '');
         });
 
-        test('should include task text element', () => {
+        it('should include task text element', () => {
             const task: Task = {
                 id: 'task-1',
                 description: 'Another task',
@@ -314,85 +314,85 @@ suite('Webview Templates Test Suite', () => {
         });
     });
 
-    suite('getLogSection', () => {
-        test('should generate log section HTML', () => {
+    describe('getLogSection', () => {
+        it('should generate log section HTML', () => {
             const log = getLogSection();
             assert.ok(log.includes('log-section'));
         });
 
-        test('should include log header with Activity title', () => {
+        it('should include log header with Activity title', () => {
             const log = getLogSection();
             assert.ok(log.includes('log-header'));
             assert.ok(log.includes('Activity'));
         });
 
-        test('should include log area', () => {
+        it('should include log area', () => {
             const log = getLogSection();
             assert.ok(log.includes('logArea'));
         });
 
-        test('should include initial log entry', () => {
+        it('should include initial log entry', () => {
             const log = getLogSection();
             assert.ok(log.includes('log-entry'));
             assert.ok(log.includes('Ready to start'));
         });
     });
 
-    suite('getFooter', () => {
-        test('should generate footer HTML', () => {
+    describe('getFooter', () => {
+        it('should generate footer HTML', () => {
             const footer = getFooter();
             assert.ok(footer.includes('footer'));
         });
 
-        test('should include cost warning', () => {
+        it('should include cost warning', () => {
             const footer = getFooter();
             assert.ok(footer.includes('footer-warning'));
             assert.ok(footer.includes('Cost Notice'));
         });
 
-        test('should include GitHub link', () => {
+        it('should include GitHub link', () => {
             const footer = getFooter();
             assert.ok(footer.includes('https://github.com/aymenfurter/ralph'));
         });
 
-        test('should include disclaimer', () => {
+        it('should include disclaimer', () => {
             const footer = getFooter();
             assert.ok(footer.includes('footer-disclaimer'));
-            assert.ok(footer.includes('Not affiliated'));
+            assert.ok(footer.includes('not officially endorsed'));
         });
     });
 
-    suite('getSettingsOverlay', () => {
-        test('should generate settings overlay HTML', () => {
+    describe('getSettingsOverlay', () => {
+        it('should generate settings overlay HTML', () => {
             const overlay = getSettingsOverlay();
             assert.ok(overlay.includes('settings-overlay'));
             assert.ok(overlay.includes('settingsOverlay'));
         });
 
-        test('should include settings header', () => {
+        it('should include settings header', () => {
             const overlay = getSettingsOverlay();
             assert.ok(overlay.includes('settings-header'));
             assert.ok(overlay.includes('Settings'));
         });
 
-        test('should include close button', () => {
+        it('should include close button', () => {
             const overlay = getSettingsOverlay();
             assert.ok(overlay.includes('settings-close'));
             assert.ok(overlay.includes('closeSettings()'));
         });
 
-        test('should include max iterations setting', () => {
+        it('should include max iterations setting', () => {
             const overlay = getSettingsOverlay();
             assert.ok(overlay.includes('settingMaxIterations'));
             assert.ok(overlay.includes('Max iterations'));
         });
 
-        test('should include updateSettings handler', () => {
+        it('should include updateSettings handler', () => {
             const overlay = getSettingsOverlay();
             assert.ok(overlay.includes('updateSettings()'));
         });
 
-        test('should include help text', () => {
+        it('should include help text', () => {
             const overlay = getSettingsOverlay();
             assert.ok(overlay.includes('setting-help'));
         });

@@ -1,4 +1,5 @@
 import { TaskRequirements } from './types';
+import * as vscode from 'vscode';
 import { readPRDAsync, readProgressAsync, getWorkspaceRoot } from './fileUtils';
 import { getConfig } from './config';
 
@@ -162,7 +163,7 @@ function buildRequirementsSteps(taskDescription: string, requirements: TaskRequi
 
 export function buildPrdGenerationPrompt(taskDescription: string, workspaceRoot: string): string {
     const sanitizedTask = sanitizeTaskDescription(taskDescription);
-    const config = getConfig();
+    const config = getConfig(vscode.Uri.file(workspaceRoot));
 
     // Check if custom PRD generation template is provided
     if (config.prompt.customPrdGenerationTemplate && config.prompt.customPrdGenerationTemplate.trim()) {
